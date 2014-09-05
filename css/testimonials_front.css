@@ -1,0 +1,54 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+
+#testimonials_front{
+	padding: 10px 20px 15px 20px;
+	background:url('../images/open-quote.png') no-repeat ;
+	background-size: 22px 22px;
+	background-position: 18px 23px;
+	text-align:justify;
+	min-height:90px;
+	margin-top: 10px;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+	box-shadow: 1px 1px 4px 1px #888888;
+	height:135px;
+	
+}
+
+
+#testimonials_front a{
+	/* float:left; */
+}
+
+.testimonial_head
+{
+	
+	text-align:left;
+	margin-top:-14px;
+	font-size:16px;
+}
+
+#testimonials_front li{ display:none;}
+#testimonials_front li:first-child{ display:block;}
+
+#testimonials_front ul{ list-style:none;}
+
+
+#testimonials_front h4{
+color:#424242;
+margin-top:-20px;
+	
+}
+
+.logo
+
+{
+	width:205px;
+	height:80px;
+	background:url('../images/logo.png') no-repeat ;}
+

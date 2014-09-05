@@ -1,0 +1,107 @@
+<?php 
+
+
+function testimonial_menu()
+{
+    $items = array();
+    $items["testimonial"] = array(
+            "title" => "Testimonials",
+            "page callback" => "testimonial_display_all",
+            "access arguments" => array("view testimonials"),
+            "type" => MENU_CALLBACK
+            );
+    return $items;
+}
+
+function testimonial_permission() {
+    return array(
+            "view testimonials" => array(
+                "title" => t("Access testimonials"),
+                "description" => t("Allows users to view testimonials.")
+                ),
+            // "manage testimonials",
+            );
+}
+function testimonial_display_all() {
+    $page_content = "";
+    $output = "";
+    $page_content .= "<div id='testimonials_front'>";
+    $page_content .= "<div style='mar:-50px' id='panel'>";
+    $page_content .= "<a href='/testimonials' title='View all Testimonials' class='testimonial_head'>Testimonials</a>";
+    $page_content .= "</div>";
+    $page_content .= "<ul>";
+    db_set_active('your_second_db_alias');
+    // $query = "SELECT * FROM scilab.testimonials";
+    $result = db_select("testimonials")
+        ->fields("testimonials")
+        ->execute()->fetchAll();
+    db_set_active();
+    foreach($result as $row) {
+#     $item = array(
+        $string =  strip_tags($row->body);
+        $length=strlen($string);
+        if($length>260)
+        {
+            $cut1= drupal_substr($string, 0, 260);
+            $cut=$cut1."  ...   ";
+            $page_content .= "<li><i><p style='margin-top:-7px'>{$cut}</i><a href='' id='$row->id' style='margin-left:5px'  data-target='#dialog{$row->id}' class='testimonial_read_more'>Read more</a></p>
+                <div id='dialog{$row->id}' class='dialog'>                                                		
+                <img src='sites/all/themes/scilab/images/x.png'  style='margin-top:-25px ;margin-left:735px;' class='lightbox_close'>
+                <i><p style='margin-top:-1px'>{$row->body}</i><hr/><br/>
+                <p style='text-align:right;margin-top:-15px'>{$row->name},</p> 
+                <p style='text-align:right;margin-top:-15px'>{$row->department},
+                {$row->university},</p>
+            <p style='text-align:right;margin-top:-15px''>{$row->contribution},{$row->reference}.</p>
+                </div>
+                <br/>
+                <p style='text-align:right;margin-top:-30px'>{$row->name},{$row->university},
+                {$row->contribution},</p>
+            <p style='text-align:right;margin-top:-15px''>{$row->reference}.</p>	
+                </li>"; 	
+        }
+        else
+        {
+            $cut= drupal_substr($string, 0, 260);
+            $page_content .= "<li><i><p style='margin-top:-7px'>{$cut}</i>
+                <div id='dialog{$row->id}' class='dialog'>                                                		
+                <img src='sites/all/themes/scilab/images/x.png'  style='margin-top:-25px ;margin-left:735px;' class='lightbox_close'>
+                <i><p style='margin-top:-1px'>{$row->body}</i><hr/><br/>
+                <p style='text-align:right;margin-top:-15px'>{$row->name},</p> 
+                <p style='text-align:right;margin-top:-15px'>{$row->department},
+                {$row->university},</p>
+            <p style='text-align:right;margin-top:-15px''>{$row->contribution},{$row->reference}.</p>
+                </div>
+                <br/>
+                <p style='text-align:right;margin-top:-30px'>{$row->name},{$row->university},
+                {$row->contribution},</p>
+            <p style='text-align:right;margin-top:-15px''>{$row->reference}.</p>	
+                </li>"; 	
+
+        }
+#         );
+    }
+ 
+                array_push($rows, $item);
+    $page_content .= " </ul>";
+    $page_content .= "</div> <!-- /#testimonials-wrapper -->";
+    $output = array(
+	    "testimonial_page" => array(
+                "#prefix" => "<div id='testimonials_front'>",
+                "#markup" =>$page_content,
+                "#suffix" => "</div>",
+            ),
+    );
+    return $output;
+}
+
+
+function testimonial_init()
+{
+
+#    drupal_add_js(drupal_get_path('module', 'testimonial') . '/js/testimonials_front.js');
+#    drupal_add_js(drupal_get_path('module', 'testimonial') . '/js/modal.js');
+#    drupal_add_js(drupal_get_path('module', 'testimonial') . '/js/lightbox_me.js');
+#    drupal_add_css(drupal_get_path("module", "testimonial") .'/css/testimonials_front.css');	
+#    drupal_add_css(drupal_get_path("module", "testimonial") .'/orbit/orbit-1.2.3.css');	
+}
+?>

@@ -1,0 +1,9 @@
+name = testimonial
+description = to view testimonials
+core = 7.x
+scripts[]= js/testimonials_front.js
+scripts[]= js/modal.js
+scripts[]= js/lightbox_me.js
+stylesheets[]= css/testimonials_front.css
+stylesheets[]= css/modal.css
+stylesheets[]= orbit/orbit-1.2.3.css
